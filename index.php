@@ -1,8 +1,4 @@
 <?php
-/**
- * @var $category
- * @var $project
- */
 
 $show_complete_tasks = rand(0, 1);
 
@@ -96,10 +92,10 @@ function item_count($tasks, $category) {
                 <h2 class="content__side-heading">Проекты</h2>
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($tasks as $task): ?>
+                        <?php foreach ($projects as $project): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?= $project ?></a>
-                            <span class="main-navigation__list-item-count"><?= item_count($tasks, $category); ?></span>
+                            <span class="main-navigation__list-item-count"><?= item_count($tasks, $project); ?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>
@@ -127,10 +123,7 @@ function item_count($tasks, $category) {
                     </nav>
 
                     <label class="checkbox">
-                        <!--добавить сюда атрибут "checked", если переменная $show_complete_tasks равна единице-->
-                            <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?php if ($show_complete_tasks = 1) {checked;} ?>>
-
-                        <input class="checkbox__input visually-hidden show_completed" type="checkbox">
+                        <input class="checkbox__input visually-hidden show_completed" type="checkbox" <?= $show_complete_tasks === 1 ? 'checked' : ''?>>
                         <span class="checkbox__text">Показывать выполненные</span>
                     </label>
                 </div>
@@ -156,7 +149,7 @@ function item_count($tasks, $category) {
                         <td class="task__date"><?= $task['date'] ?></td>
                     </tr>
                     <?php endforeach; ?>
-                    <?php if ($show_complete_tasks = 1): ?>
+                    <?php if ($show_complete_tasks === 1): ?>
                         <tr class="tasks__item task task--completed">
                             <td class="task__select">
                                 <label class="checkbox task__checkbox">
@@ -170,7 +163,6 @@ function item_count($tasks, $category) {
                             </td>
                         </tr>
                     <?php endif; ?>
-                    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
                 </table>
             </main>
         </div>
